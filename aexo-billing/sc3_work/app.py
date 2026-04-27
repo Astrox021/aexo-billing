@@ -1,4 +1,4 @@
-from flask import flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import json, os, hashlib, time, re, hmac as hmac_lib, requests as req_lib
 
 app = lask(__name__)
