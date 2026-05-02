@@ -782,3 +782,8 @@ if __name__ == '__main__':
     print('🤖 Arvex Cloud Bot starting...')
     print(f'   Type .help in DM to see all commands')
     client.run(token)
+
+
+
+
+
