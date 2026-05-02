@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import json, os, hashlib, time, re, hmac as hmac_lib, requests as req_lib
 
 app = Flask(__name__)
-app.secret_key = 'strengthcloud_ultra_v3_secret_key_2024'
+app.secret_key = 'Arvex Cloud_ultra_v3_secret_key_2024'
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 app.config['SESSION_COOKIE_SECURE'] = False  # set True in production with HTTPS
 app.config['SESSION_COOKIE_HTTPONLY'] = True
@@ -50,7 +50,7 @@ DEFAULT_DATA = {
         {"q":"Do you offer refunds?","a":"We offer a 3-day money-back guarantee on all plans."},
     ],
     "testimonials":[
-        {"name":"Alex_MC","role":"Server Owner","stars":5,"text":"StrengthCloud is incredible! Lag-free with 50+ players."},
+        {"name":"Alex_MC","role":"Server Owner","stars":5,"text":"Arvex Cloud is incredible! Lag-free with 50+ players."},
         {"name":"CraftKing","role":"Modpack Dev","stars":5,"text":"Server went live instantly after payment. Amazing!"},
         {"name":"PixelStudio","role":"Gaming Community","stars":5,"text":"Switched from another host — night and day difference."},
         {"name":"BlockMaster99","role":"SMP Owner","stars":4,"text":"Great uptime and the control panel is super easy."},
@@ -97,8 +97,8 @@ DEFAULT_DATA = {
         "whm_url":"",
         "api_token":"",
         "default_package":"default",
-        "nameserver1":"ns1.strengthcloud.xyz",
-        "nameserver2":"ns2.strengthcloud.xyz",
+        "nameserver1":"ns1.Arvex Cloud.xyz",
+        "nameserver2":"ns2.Arvex Cloud.xyz",
         "ip_address":"",
         "auto_provision":True
     },
@@ -174,12 +174,12 @@ def discord_notify(order):
                 {"name":"📅 Date","value":order.get('date',''),"inline":True},
                 {"name":"📦 Items","value":'\n'.join(item_lines) or '—',"inline":False},
             ],
-            "footer":{"text":"StrengthCloud Order Alert"},
+            "footer":{"text":"Arvex Cloud Order Alert"},
             "timestamp": time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         }
         if utr: embed['fields'].append({"name":"🔖 UTR / Ref","value":f"`{utr}`","inline":True})
         if pid: embed['fields'].append({"name":"💳 Payment ID","value":f"`{pid}`","inline":True})
-        req_lib.post(webhook_url, json={"embeds":[embed],"username":"StrengthCloud","avatar_url":"https://cdn.discordapp.com/icons/1416472559104299210/6299f0c15609e8680791202bfa89df74.webp"}, timeout=8)
+        req_lib.post(webhook_url, json={"embeds":[embed],"username":"Arvex Cloud","avatar_url":"https://cdn.discordapp.com/icons/1416472559104299210/6299f0c15609e8680791202bfa89df74.webp"}, timeout=8)
     except Exception as e:
         print(f'Discord notify error: {e}')
 
@@ -315,7 +315,7 @@ def auto_provision(order):
         user = {
             'id': uid,
             'username': username or f'user{uid}',
-            'email': f'{username or "user"}@strengthcloud.local',
+            'email': f'{username or "user"}@Arvex Cloud.local',
             'fname': username or 'User',
             'lname': ''
         }
@@ -443,7 +443,7 @@ def generate_cpanel_details(order, cfg):
     # cPanel username: max 16 chars, alphanumeric only
     cp_user = re.sub(r'[^a-z0-9]', '', uname.lower())[:12] + str(order['id'] % 1000)
     cp_user = cp_user[:16]
-    domain = f"{cp_user}.strengthcloud.xyz"
+    domain = f"{cp_user}.Arvex Cloud.xyz"
     password = f"SC#{hashlib.sha256((cp_user + str(order['id'])).encode()).hexdigest()[:10]}@1"
     return cp_user, domain, password
 
@@ -621,7 +621,7 @@ def login():
     if request.method=='POST':
         data=load_data(); uname=request.form.get('username','').strip(); pw=request.form.get('password','')
         if uname==data['admin']['username'] and hash_pw(pw)==data['admin']['password']:
-            session['admin']=True; session.permanent=True; session['user']={'username':uname,'role':'admin','id':0,'email':'admin@strengthcloud.com'}; return redirect(url_for('admin'))
+            session['admin']=True; session.permanent=True; session['user']={'username':uname,'role':'admin','id':0,'email':'admin@Arvex Cloud.com'}; return redirect(url_for('admin'))
         for u in data.get('users',[]):
             if u['username']==uname and u['password']==hash_pw(pw):
                 if not u.get('active',True): return render_template('login.html',error='Account suspended.',data=data,cart_count=cart_count())
@@ -858,7 +858,7 @@ def admin_login():
         # Check super admin
         if uname==data['admin']['username'] and hash_pw(pw)==data['admin']['password']:
             session['admin']=True; session.permanent=True
-            session['user']={'username':uname,'role':'admin','id':0,'email':'admin@strengthcloud.com'}
+            session['user']={'username':uname,'role':'admin','id':0,'email':'admin@Arvex Cloud.com'}
             return redirect(url_for('admin'))
         # Check user-level admins
         for u in data.get('users',[]):

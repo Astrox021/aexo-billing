@@ -1,5 +1,5 @@
 """
-StrengthCloud Discord Bot — Full Command System
+Arvex Cloud Discord Bot — Full Command System
 ────────────────────────────────────────────────
 Prefix: .  (dot)   |   Type .help to see all commands
 
@@ -95,7 +95,7 @@ def order_embed(order, title=None, color=None):
     ptero = order.get('ptero_provisioned', False)
     cp    = order.get('cpanel_provisioned', False)
     embed.add_field(name='⚙️ Provision', value='✅ Done' if (ptero or cp) else '⏳ Pending', inline=True)
-    embed.set_footer(text='StrengthCloud Bot')
+    embed.set_footer(text='Arvex Cloud Bot')
     return embed
 
 # ── UI Buttons (attached to DM notifications) ─────────────────────
@@ -294,7 +294,7 @@ async def handle_command(message):
     # ══════════════════════════════════════════════════════════════
     if cmd == 'help':
         embed = discord.Embed(
-            title='🤖 StrengthCloud Bot — Command List',
+            title='🤖 Arvex Cloud Bot — Command List',
             description='**Prefix:** `.` (dot)  |  Only the owner can run these',
             color=0x8b5cf6,
             timestamp=discord.utils.utcnow()
@@ -361,7 +361,7 @@ async def handle_command(message):
             '`.order 73438`'
         ), inline=False)
 
-        embed.set_footer(text='StrengthCloud Bot • All actions directly from Discord')
+        embed.set_footer(text='Arvex Cloud Bot • All actions directly from Discord')
         await message.reply(embed=embed)
 
     # ══════════════════════════════════════════════════════════════
@@ -371,7 +371,7 @@ async def handle_command(message):
         res = api('GET', '/bot/stats')
         if 'error' in res:
             await message.reply(f'❌ {res["error"]}'); return
-        embed = discord.Embed(title='📊 StrengthCloud Stats', color=0x8b5cf6, timestamp=discord.utils.utcnow())
+        embed = discord.Embed(title='📊 Arvex Cloud Stats', color=0x8b5cf6, timestamp=discord.utils.utcnow())
         embed.add_field(name='👥 Users',    value=f'`{res["total_users"]}` total / `{res["active_users"]}` active', inline=True)
         embed.add_field(name='📦 Orders',   value=f'`{res["total_orders"]}` total', inline=True)
         embed.add_field(name='⏳ Pending',  value=f'`{res["pending_orders"]}`', inline=True)
@@ -779,6 +779,6 @@ if __name__ == '__main__':
     if not token:
         print('❌ No bot_token — set it in Admin Panel → Discord Bot')
         exit(1)
-    print('🤖 StrengthCloud Bot starting...')
+    print('🤖 Arvex Cloud Bot starting...')
     print(f'   Type .help in DM to see all commands')
     client.run(token)
