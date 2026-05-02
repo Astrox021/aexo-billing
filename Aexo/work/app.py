@@ -502,12 +502,12 @@ def auto_provision_vps(order):
     return result
 
 # ── RAZORPAY ──────────────────────────────────────────────────────
-def rz_create_order(key_id, key_secret, amount_inr, receipt):
+def rz_create_order(key_id, key_secret, amount_usd, receipt):
     import base64 as b64
     try:
         creds=b64.b64encode(f"{key_id}:{key_secret}".encode()).decode()
         r=req_lib.post('https://api.razorpay.com/v1/orders',
-            json={'amount':amount_inr*100,'currency':'INR','receipt':str(receipt)},
+            json={'amount':amount_usd*100,'currency':'INR','receipt':str(receipt)},
             headers={'Authorization':f'Basic {creds}','Content-Type':'application/json'},timeout=10)
         if r.status_code==200: return r.json().get('id'),None
         return None,r.text
@@ -1141,6 +1141,7 @@ def ptero_nodes():
         return jsonify({'nodes': nodes, 'panel_url': base})
     except Exception as e:
         return jsonify({'error': str(e)})
+
 
 
 
