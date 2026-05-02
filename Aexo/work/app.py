@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import json, os, hashlib, time, re, hmac as hmac_lib, requests as req_lib
 
-app = lask(__name__)
+app = Flask(__name__)
 app.secret_key = 'strengthcloud_ultra_v3_secret_key_2024'
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 app.config['SESSION_COOKIE_SECURE'] = False  # set True in production with HTTPS
