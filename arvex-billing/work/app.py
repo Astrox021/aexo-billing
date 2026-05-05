@@ -44,4 +44,7 @@ def success():
 def cancel():
     return "Payment cancelled."
 
+@app.route("/"
+           def home():
+               return "Arvex Cloud Running"
 app.run(host="0.0.0.0", port=5000)
